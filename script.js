@@ -1,6 +1,11 @@
 function main() {
     // URL del endpoint para obtener los resultados de la última carrera
     const resultsUrl = 'https://ergast.com/api/f1/current/last/results.json';
+    obtenerResultadosCarrera(resultsUrl);
+
+    // ATENCION: Se permite un máximo de 4 llamadas por segundo o 240 llamadas por minuto
+    const refreshTime = 20000; // tiempo de refresco en milisegundos
+    const intervalId = actualizarEstadoCarrera(resultsUrl, refreshTime);
 
     // Función para mostrar un mensaje de estado
     function showRaceStatus(status) {
@@ -48,56 +53,73 @@ function main() {
         });
     }
 
-    // Obtener los resultados de la última carrera desde la API de Ergast
-    fetch(resultsUrl)
-        // Hacer una petición HTTP GET a la API de Ergast para obtener los resultados de la última carrera
-        .then(response => response.json()) // Convertir la respuesta a formato JSON
-        .then(data => {
-            //console.log(data);
-
-            // Obtener los resultados de la carrera y mostrarlos en la tabla
-            const results = data.MRData.RaceTable.Races[0].Results; // Obtener los resultados de la carrera
-            //console.log(data.MRData.RaceTable.Races[0]);
-            //console.log(results);
-
-            updateRaceResults(results); // Actualizar la tabla con los resultados de la carrera
-
-            // Mostrar los datos de la carrera
-            const raceName = data.MRData.RaceTable.Races[0].raceName;
-            const circuitName = data.MRData.RaceTable.Races[0].Circuit.circuitName;
-            const circuitLocation = data.MRData.RaceTable.Races[0].Circuit.Location.locality;
-            const raceDate = data.MRData.RaceTable.Races[0].date;
-            showRaceData(raceName, circuitName, circuitLocation, raceDate);
-
-            // Mostrar el estado de la carrera
-            const raceState = data.MRData.RaceTable.Races[0].status || 'Estado no disponible'; // Obtener el estado de la carrera
-            showRaceStatus(`Estado de la carrera: ${raceState}`);
-            // Mostrar el estado de la carrera
-        })
-        .catch(error => {
-            console.log(error);
-            showRaceStatus('Ocurrió un error al cargar los resultados de la carrera.');
-        });
-
-    // Actualizar el estado de la carrera
-    // ATENCION: Se permite un máximo de 4 llamadas por segundo o 240 llamadas por minuto
-    const refreshTime = 20000; // tiempo de refresco en milisegundos
-    setInterval(() => {
-        // Hacer una petición al endpoint de resultados de la última carrera
+    // Función para obtener los resultados de la última carrera desde la API de Ergast
+    function obtenerResultadosCarrera(resultsUrl) {
         fetch(resultsUrl)
-            .then(response => response.json())
+            // Hacer una petición HTTP GET a la API de Ergast para obtener los resultados de la última carrera
+            .then(response => response.json()) // Convertir la respuesta a formato JSON
             .then(data => {
-                // Obtener el estado de la carrera de los datos obtenidos
-                const raceState = data.MRData.RaceTable.Races[0].status || 'Estado no disponible';
-                // Actualizar el estado de la carrera en la página
+                //console.log(data);
+
+                // Obtener los resultados de la carrera y mostrarlos en la tabla
+                const results = data.MRData.RaceTable.Races[0].Results; // Obtener los resultados de la carrera
+                //console.log(data.MRData.RaceTable.Races[0]);
+                //console.log(results);
+
+                updateRaceResults(results); // Actualizar la tabla con los resultados de la carrera
+
+                // Mostrar los datos de la carrera
+                const raceName = data.MRData.RaceTable.Races[0].raceName;
+                const circuitName = data.MRData.RaceTable.Races[0].Circuit.circuitName;
+                const circuitLocation = data.MRData.RaceTable.Races[0].Circuit.Location.locality;
+                const raceDate = data.MRData.RaceTable.Races[0].date;
+                showRaceData(raceName, circuitName, circuitLocation, raceDate);
+
+                // Mostrar el estado de la carrera
+                const raceState = data.MRData.RaceTable.Races[0].status || 'Estado no disponible'; // Obtener el estado de la carrera
                 showRaceStatus(`Estado de la carrera: ${raceState}`);
+                // Mostrar el estado de la carrera
             })
             .catch(error => {
-                // En caso de error, mostrar un mensaje en el elemento de estado de la carrera
                 console.log(error);
-                showRaceStatus('Ocurrió un error al actualizar el estado de la carrera.');
+                showRaceStatus('Ocurrió un error al cargar los resultados de la carrera.');
             });
-    }, refreshTime);
+    }
+
+    // Función para actualizar el estado de la carrera
+    function actualizarEstadoCarrera(resultsUrl, refreshTime) {
+        let intervalId;
+        intervalId = setInterval(() => {
+            // Hacer una petición al endpoint de resultados de la última carrera
+            fetch(resultsUrl)
+                .then(response => response.json())
+                .then(data => {
+                    // Obtener el estado de la carrera de los datos obtenidos
+                    const raceState = data.MRData.RaceTable.Races[0].status || 'Estado no disponible';
+                    const raceDate = data.MRData.RaceTable.Races[0].date;
+                    // Actualizar el estado de la carrera en la página
+                    showRaceStatus(`Estado de la carrera: ${raceState}`);
+
+                    if (!esFechaAnterior(raceDate)) {
+                        // Si la fecha de la carrera es igual a la fecha actual, ejecutar actualizarEstadoCarrera
+                        const intervalId = actualizarEstadoCarrera(resultsUrl, refreshTime);
+                    }
+                })
+                .catch(error => {
+                    // En caso de error, mostrar un mensaje en el elemento de estado de la carrera
+                    console.log(error);
+                    showRaceStatus('Ocurrió un error al actualizar el estado de la carrera.');
+                });
+        }, refreshTime);
+
+        return intervalId;
+    }
+
+    // Función para comprobar si una fecha es anterior a la fecha actual
+    function esFechaAnterior(fecha) {
+        const fechaActual = new Date();
+        return new Date(fecha) < fechaActual;
+    }
 }
 
 main();
