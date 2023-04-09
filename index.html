@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Resultados en tiempo real de Fórmula 1</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Fórmula 1</h1>
+            <p id="race-status">Cargando resultados...</p>
+        </div>
+        <div class="table-container">
+            <h2>Resultados de la última carrera</h2>
+            <table id="race-data" class="table">
+                <tbody>
+                    <tr>
+                        <td>Carrera:</td>
+                        <td id="race-name"></td>
+                    </tr>
+                    <tr>
+                        <td>Circuito:</td>
+                        <td id="circuit-name"></td>
+                    </tr>
+                    <tr>
+                        <td>Localidad:</td>
+                        <td id="circuit-location"></td>
+                    </tr>
+                    <tr>
+                        <td>Fecha:</td>
+                        <td id="race-date"></td>
+                    </tr>
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+    <table id="race-results" class="table">
+        <tbody>
+            <thead>
+                <th>Posición</th>
+                <th>Piloto</th>
+                <th>Equipo</th>
+                <th>Vueltas</th>
+                <th>Tiempo</th>
+                <th>Puntos</th>
+            </thead>
+            <!-- filas de resultados, se agregarán con JavaScript -->
+        </tbody>
+    </table>
+
+
+    <script src="script.js"></script>
+</body>
+
+</html>

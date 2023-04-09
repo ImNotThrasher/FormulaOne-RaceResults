@@ -1,0 +1,172 @@
+/* Este bloque define las variables de colores personalizados para cada escudería en la propiedad de :root*/
+:root {
+    --alfa-romeo-color: #960018;
+    --alpine-f1-color: #0090ff;
+    --aston-martin-color: #006f62;
+    --ferrari-color: #dc0000;
+    --haas-f1-color: #f0d787;
+    --mclaren-color: #ff8700;
+    --mercedes-color: #00d2be;
+    --red-bull-color: #0600ef;
+    --williams-color: #005aff;
+    --alphatauri-color: #469b9b;
+}
+
+/* Estilos generales */
+
+.container {
+    text-align: center;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 20px;
+    font-family: Arial, sans-serif;
+}
+
+h1 {
+    font-size: 3rem;
+    margin-bottom: 10px;
+    font-family: "Times New Roman", Times, serif;
+}
+
+h2 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+/* Tabla de resultados */
+
+.table {
+    border-collapse: collapse;
+    margin: 0 auto 20px auto;
+    max-width: 1000px;
+    width: 100%;
+    font-family: Arial, sans-serif;
+    font-size: 1.2rem;
+    color: #555;
+}
+
+.table td,
+.table th {
+    padding: 10px;
+    border: 1px solid #ccc;
+    text-align: center;
+}
+
+.table th {
+    background-color: #eee;
+    font-weight: bold;
+    color: #555;
+}
+
+#race-results {
+    background-color: #fff;
+}
+
+#race-results th {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background-color: #eee;
+}
+
+#race-results td {
+    background-color: #f9f9f9;
+}
+
+#race-results td:nth-child(1) {
+    font-weight: bold;
+}
+
+#race-results td:nth-child(2) {
+    font-weight: bold;
+    color: #ff5e00;
+}
+
+#race-results td:nth-child(3) {
+    font-weight: bold;
+}
+
+/* Tabla de datos */
+
+#race-data {
+    margin-top: 30px;
+    border-collapse: collapse;
+}
+
+#race-data td {
+    padding: 5px 20px;
+    border: 1px solid #ccc;
+}
+
+
+/* Elementos específicos */
+
+#race-status {
+    font-size: 1.2rem;
+    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+}
+
+.constructor-name-alfa-romeo {
+    color: var(--alfa-romeo-color);
+}
+
+.constructor-name-alpine-f1 {
+    color: var(--alpine-f1-color);
+}
+
+.constructor-name-aston-martin {
+    color: var(--aston-martin-color);
+}
+
+.constructor-name-ferrari {
+    color: var(--ferrari-color);
+}
+
+.constructor-name-haas-f1 {
+    color: var(--haas-f1-color);
+}
+
+.constructor-name-mclaren {
+    color: var(--mclaren-color);
+}
+
+.constructor-name-mercedes {
+    color: var(--mercedes-color);
+}
+
+.constructor-name-red-bull {
+    color: var(--red-bull-color);
+}
+
+.constructor-name-williams {
+    color: var(--williams-color);
+}
+
+.constructor-name-alphatauri {
+    color: var(--alphatauri-color);
+}
+
+@media (max-width: 768px) {
+
+    /* Este bloque define las propiedades de estilo para los encabezados H1 */
+    h1 {
+        font-size: 2.5rem;
+    }
+
+    /* Este bloque define las propiedades de estilo para los encabezados H2 */
+    h2 {
+        font-size: 1.8rem;
+    }
+
+    /* Este bloque define las propiedades de estilo para el elemento con ID race-status */
+    #race-status {
+        font-size: 1rem;
+    }
+
+    /* Este bloque define las propiedades de estilo para la tabla con clase .table */
+    .table {
+        font-size: 1rem;
+    }
+}
