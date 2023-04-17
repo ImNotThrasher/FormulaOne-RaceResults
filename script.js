@@ -1,10 +1,12 @@
 function main() {
     // URL del endpoint para obtener los resultados de la última carrera
     const resultsUrl = 'https://ergast.com/api/f1/current/last/results.json';
+    // Llamar a la función para obtener los resultados de la última carrera desde la API de Ergast
     obtenerResultadosCarrera(resultsUrl);
 
     // ATENCION: Se permite un máximo de 4 llamadas por segundo o 240 llamadas por minuto
     const refreshTime = 20000; // tiempo de refresco en milisegundos
+    // Llamar a la función para actualizar el estado de la carrera en un intervalo de tiempo definido
     const intervalId = actualizarEstadoCarrera(resultsUrl, refreshTime);
 
     // Función para mostrar un mensaje de estado
@@ -85,7 +87,9 @@ function main() {
     // Función para actualizar el estado de la carrera
     async function actualizarEstadoCarrera(resultsUrl, refreshTime) {
         try {
+            // Definir un identificador para el intervalo de tiempo
             let intervalId;
+            // Crear un intervalo de tiempo y actualizar el estado de la carrera
             intervalId = setInterval(async () => {
                 const response = await fetch(resultsUrl); // Hacer una petición al endpoint de resultados de la última carrera
                 const data = await response.json();
@@ -96,17 +100,20 @@ function main() {
                 showRaceStatus(`Estado de la carrera: ${raceState}`);
 
                 if (!esFechaAnterior(raceDate)) {
-                    // Si la fecha de la carrera es igual a la fecha actual, ejecutar actualizarEstadoCarrera
-                    const intervalId = actualizarEstadoCarrera(resultsUrl, refreshTime);
+                    // Si la fecha de la carrera es igual a la fecha actual, detener el intervalo y actualizar los resultados de la carrera
+                    clearInterval(intervalId);
+                    await obtenerResultadosCarrera(resultsUrl);
                 }
             }, refreshTime);
 
             return intervalId;
         } catch (error) {
             console.log(error);
+            clearInterval(intervalId);
             showRaceStatus('Ocurrió un error al actualizar el estado de la carrera.');
         }
     }
+
 
     // Función para comprobar si una fecha es anterior a la fecha actual
     function esFechaAnterior(fecha) {
