@@ -18,7 +18,7 @@ function main() {
     }
 
     // Función para mostrar los datos de la carrera
-    function showRaceData(raceName, circuitName, circuitLocation, raceDate) {
+    function showRaceData(raceName, circuitName, circuitLocation, raceDate, showInPage = true) {
         // Obtener el elemento que contiene el nombre de la carrera
         document.getElementById("race-name").innerHTML = raceName;
         // Obtener el elemento que contiene el nombre del circuito
@@ -27,6 +27,11 @@ function main() {
         document.getElementById("circuit-location").innerHTML = circuitLocation;
         // Obtener el elemento que contiene la fecha de la carrera
         document.getElementById("race-date").innerHTML = raceDate;
+
+        if (!showInPage) {
+            // Ocultar los datos de la carrera en la página
+            document.getElementById("race-data").style.display = "none";
+        }
     }
 
     // Función para actualizar la tabla con los resultados de la carrera
