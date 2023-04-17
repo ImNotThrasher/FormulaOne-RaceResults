@@ -54,65 +54,58 @@ function main() {
     }
 
     // Función para obtener los resultados de la última carrera desde la API de Ergast
-    function obtenerResultadosCarrera(resultsUrl) {
-        fetch(resultsUrl)
-            // Hacer una petición HTTP GET a la API de Ergast para obtener los resultados de la última carrera
-            .then(response => response.json()) // Convertir la respuesta a formato JSON
-            .then(data => {
-                //console.log(data);
+    async function obtenerResultadosCarrera(resultsUrl) {
+        try {
+            const response = await fetch(resultsUrl); // Hacer una petición HTTP GET a la API de Ergast para obtener los resultados de la última carrera
+            const data = await response.json(); // Convertir la respuesta a formato JSON
+            //console.log(data);
 
-                // Obtener los resultados de la carrera y mostrarlos en la tabla
-                const results = data.MRData.RaceTable.Races[0].Results; // Obtener los resultados de la carrera
-                //console.log(data.MRData.RaceTable.Races[0]);
-                //console.log(results);
+            // Obtener los resultados de la carrera y mostrarlos en la tabla
+            const results = data.MRData.RaceTable.Races[0].Results; // Obtener los resultados de la carrera
+            //console.log(data.MRData.RaceTable.Races[0]);
+            //console.log(results);
+            updateRaceResults(results); // Actualizar la tabla con los resultados de la carrera
 
-                updateRaceResults(results); // Actualizar la tabla con los resultados de la carrera
+            // Mostrar los datos de la carrera
+            const raceName = data.MRData.RaceTable.Races[0].raceName;
+            const circuitName = data.MRData.RaceTable.Races[0].Circuit.circuitName;
+            const circuitLocation = data.MRData.RaceTable.Races[0].Circuit.Location.locality;
+            const raceDate = data.MRData.RaceTable.Races[0].date;
+            showRaceData(raceName, circuitName, circuitLocation, raceDate);
 
-                // Mostrar los datos de la carrera
-                const raceName = data.MRData.RaceTable.Races[0].raceName;
-                const circuitName = data.MRData.RaceTable.Races[0].Circuit.circuitName;
-                const circuitLocation = data.MRData.RaceTable.Races[0].Circuit.Location.locality;
-                const raceDate = data.MRData.RaceTable.Races[0].date;
-                showRaceData(raceName, circuitName, circuitLocation, raceDate);
-
-                // Mostrar el estado de la carrera
-                const raceState = data.MRData.RaceTable.Races[0].status || 'Estado no disponible'; // Obtener el estado de la carrera
-                showRaceStatus(`Estado de la carrera: ${raceState}`);
-                // Mostrar el estado de la carrera
-            })
-            .catch(error => {
-                console.log(error);
-                showRaceStatus('Ocurrió un error al cargar los resultados de la carrera.');
-            });
+            // Mostrar el estado de la carrera
+            const raceState = data.MRData.RaceTable.Races[0].status || 'Estado no disponible'; // Obtener el estado de la carrera
+            showRaceStatus(`Estado de la carrera: ${raceState}`);
+        } catch (error) {
+            console.log(error);
+            showRaceStatus('Ocurrió un error al cargar los resultados de la carrera.');
+        }
     }
 
     // Función para actualizar el estado de la carrera
-    function actualizarEstadoCarrera(resultsUrl, refreshTime) {
-        let intervalId;
-        intervalId = setInterval(() => {
-            // Hacer una petición al endpoint de resultados de la última carrera
-            fetch(resultsUrl)
-                .then(response => response.json())
-                .then(data => {
-                    // Obtener el estado de la carrera de los datos obtenidos
-                    const raceState = data.MRData.RaceTable.Races[0].status || 'Estado no disponible';
-                    const raceDate = data.MRData.RaceTable.Races[0].date;
-                    // Actualizar el estado de la carrera en la página
-                    showRaceStatus(`Estado de la carrera: ${raceState}`);
+    async function actualizarEstadoCarrera(resultsUrl, refreshTime) {
+        try {
+            let intervalId;
+            intervalId = setInterval(async () => {
+                const response = await fetch(resultsUrl); // Hacer una petición al endpoint de resultados de la última carrera
+                const data = await response.json();
+                // Obtener el estado de la carrera de los datos obtenidos
+                const raceState = data.MRData.RaceTable.Races[0].status || 'Estado no disponible';
+                const raceDate = data.MRData.RaceTable.Races[0].date;
+                // Actualizar el estado de la carrera en la página
+                showRaceStatus(`Estado de la carrera: ${raceState}`);
 
-                    if (!esFechaAnterior(raceDate)) {
-                        // Si la fecha de la carrera es igual a la fecha actual, ejecutar actualizarEstadoCarrera
-                        const intervalId = actualizarEstadoCarrera(resultsUrl, refreshTime);
-                    }
-                })
-                .catch(error => {
-                    // En caso de error, mostrar un mensaje en el elemento de estado de la carrera
-                    console.log(error);
-                    showRaceStatus('Ocurrió un error al actualizar el estado de la carrera.');
-                });
-        }, refreshTime);
+                if (!esFechaAnterior(raceDate)) {
+                    // Si la fecha de la carrera es igual a la fecha actual, ejecutar actualizarEstadoCarrera
+                    const intervalId = actualizarEstadoCarrera(resultsUrl, refreshTime);
+                }
+            }, refreshTime);
 
-        return intervalId;
+            return intervalId;
+        } catch (error) {
+            console.log(error);
+            showRaceStatus('Ocurrió un error al actualizar el estado de la carrera.');
+        }
     }
 
     // Función para comprobar si una fecha es anterior a la fecha actual
