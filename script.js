@@ -50,8 +50,10 @@ function main() {
             const newRow = document.createElement('tr');
             newRow.innerHTML = `
           <td>${result.position}</td>
+          <td>${result.Driver.code}</td>
           <td>${result.Driver.givenName} ${result.Driver.familyName}</td>
           <td class="constructor-name-${result.Constructor.name.toLowerCase().replace(" ", "-")}">${result.Constructor.name}</td>
+
           <td>${result.laps}</td>
           <td>${result.Time ? result.Time.time : '-'}</td>
           <td>${result.points}</td>
