@@ -106,8 +106,8 @@ function main() {
                 // Actualizar el estado de la carrera en la página
                 showRaceStatus(`Estado de la carrera: ${raceState}`);
 
-                if (!esFechaAnterior(raceDate)) {
-                    // Si la fecha de la carrera es igual a la fecha actual, detener el intervalo y actualizar los resultados de la carrera
+                if (!(esFechaAnterior(raceDate) || esFechaPosterior(raceDate))) {
+                    // Si la fecha actual es igual a la de la carrera, detener el intervalo y actualizar los resultados de la carrera
                     clearInterval(intervalId);
                     await obtenerResultadosCarrera(resultsUrl);
                 }
@@ -126,6 +126,12 @@ function main() {
     function esFechaAnterior(fecha) {
         const fechaActual = new Date();
         return new Date(fecha) < fechaActual;
+    }
+
+    // Función para comprobar si la fecha es posterior a la fecha actual
+    function esFechaPosterior(fecha) {
+        const fechaActual = new Date();
+        return new Date(fecha) > fechaActual;
     }
 }
 
