@@ -1,14 +1,24 @@
-# FormulaOne-RaceResults
-Este es un proyecto que utiliza la API de Ergast para mostrar los resultados de la última carrera de la Fórmula 1 en una tabla.
-También muestra otros datos importantes como el nombre del circuito, la localidad y la fecha. Además, actualiza automáticamente el estado de la carrera.
+# F1 Race Results
+
+Sitio estático para consultar la próxima carrera y los resultados de la última fecha del Campeonato Mundial de Fórmula 1.
 
 ## Uso
-Para usar este proyecto, simplemente se debe descargar o clonar el repositorio en tu computadora, y abrir el archivo index.html en tu navegador web. La página web cargará automáticamente los resultados de la última carrera de la Fórmula 1 y actualizará su estado cada 20 segundos.
-O puedes ingresar en https://formulaone-raceresults.netlify.app/ .
 
-## Tecnologías utilizadas
-Este proyecto utiliza las siguientes tecnologías:
+Abrí `index.html` en un navegador moderno o publicá el repositorio en un servicio de hosting estático, como Netlify. No requiere instalar dependencias ni compilar.
+
+La página carga los datos al abrirse, permite actualizarlos manualmente y vuelve a consultarlos cada cinco minutos. Necesita conexión a internet para obtener información de la API.
+
+## Datos
+
+Los datos se consultan desde [Jolpica F1](https://github.com/jolpica/jolpica-f1), una API comunitaria compatible con la API de Ergast:
+
+- Próxima carrera: `https://api.jolpi.ca/ergast/f1/current/next.json`
+- Últimos resultados: `https://api.jolpi.ca/ergast/f1/current/last/results.json`
+
+La disponibilidad y actualización de los datos dependen del servicio de Jolpica F1.
+
+## Tecnologías
 
 - HTML5
 - CSS3
-- JavaScript
+- JavaScript moderno (sin dependencias)
