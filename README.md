@@ -1,6 +1,16 @@
 # F1 Race Results
 
+Copyright (C) 2026 [@ImNotThrasher](https://github.com/ImNotThrasher).
+
+Este proyecto está licenciado bajo la [GNU General Public License v3.0](LICENSE).
+
 Sitio estático para consultar la próxima carrera y los resultados de la última fecha del Campeonato Mundial de Fórmula 1.
+
+## Índice
+
+- [Uso](#uso)
+- [Datos](#datos)
+- [Tecnologías](#tecnologías)
 
 ## Uso
 
