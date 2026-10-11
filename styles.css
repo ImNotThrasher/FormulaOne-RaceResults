@@ -29,7 +29,11 @@ a { color: inherit; }
 .season-label, .live-indicator, .eyebrow, .hero-bottom, .section-index, .race-round span, .race-season, .race-date-block span, .race-card-note, .last-race-label, .refresh-button, .results-table th, .data-status, .footer-credit { font-family: var(--mono); font-size: 10px; letter-spacing: 1.4px; }
 .season-label { color: #cacbd0; }
 .live-indicator { color: var(--muted); display: flex; gap: 9px; align-items: center; letter-spacing: 1px; }
-.live-indicator span { width: 7px; height: 7px; border-radius: 50%; background: #89bf75; box-shadow: 0 0 12px #89bf7580; }
+.status-dot { flex: 0 0 7px; width: 7px; height: 7px; border-radius: 50%; background: #d2a14f; box-shadow: 0 0 12px #d2a14f70; }
+.live-indicator[data-state="fresh"] .status-dot { background: #89bf75; box-shadow: 0 0 12px #89bf7580; }
+.live-indicator[data-state="stale"] .status-dot,
+.live-indicator[data-state="partial"] .status-dot { background: #e2a33e; box-shadow: 0 0 12px #e2a33e70; }
+.live-indicator[data-state="error"] .status-dot { background: var(--accent); box-shadow: 0 0 12px #e1060070; }
 .hero { position: relative; min-height: 480px; display: flex; align-items: center; border-bottom: 1px solid var(--line); }
 .hero-copy { position: relative; z-index: 1; padding: 64px 0 70px; }
 .eyebrow { color: #a6a7af; display: flex; align-items: center; gap: 11px; margin: 0 0 22px; }
@@ -97,21 +101,32 @@ h2 { margin-bottom: 0; font: 600 clamp(29px, 4vw, 42px)/1.1 var(--display); lett
 .driver-code { color: #8a8e98; font: 10px var(--mono); }
 .driver-name { color: #eeeff1; font: 600 13px var(--display); }
 .team-cell { font-weight: 600; }
-.team-alpine, .team-alpine-f1-team { color: #46a5fa !important; }
-.team-aston-martin { color: #42b39b !important; }
-.team-ferrari { color: #ff4545 !important; }
-.team-haas, .team-haas-f1-team { color: #e5e7e9 !important; }
-.team-mclaren { color: #ff994d !important; }
-.team-mercedes { color: #62d8d2 !important; }
-.team-rb, .team-racing-bulls, .team-rb-f1-team { color: #8d9ddd !important; }
-.team-red-bull, .team-red-bull-racing { color: #8195ff !important; }
-.team-williams { color: #63a2ff !important; }
-.team-kick-sauber, .team-audi { color: #8abf75 !important; }
-.team-cadillac, .team-cadillac-f1-team { color: #c4c4ca !important; }
+.results-table .team-cell { min-width: 165px; font-weight: 600; white-space: nowrap; }
+.team-alpine, .team-alpine-f1-team { color: #59adff !important; }
+.team-aston-martin { color: #54c9ad !important; }
+.team-ferrari { color: #ff5a63 !important; }
+.team-haas, .team-haas-f1-team { color: #d6d8dc !important; }
+.team-mclaren { color: #ff9b50 !important; }
+.team-mercedes { color: #65ddd4 !important; }
+.team-rb, .team-racing-bulls, .team-rb-f1-team { color: #a3b2ff !important; }
+.team-red-bull, .team-red-bull-racing { color: #879eff !important; }
+.team-williams { color: #73b0ff !important; }
+.team-kick-sauber { color: #90c783 !important; }
+.team-audi { color: #ff6873 !important; }
+.team-cadillac, .team-cadillac-f1-team { color: #d3d6dc !important; }
+.team-alfa-romeo { color: #db5362 !important; }
+.team-alphatauri { color: #a0bdca !important; }
+.team-renault { color: #e3c74b !important; }
+.team-racing-point, .team-force-india { color: #f18fb3 !important; }
+.team-toro-rosso { color: #84a3dc !important; }
+.team-lotus { color: #d3bd57 !important; }
 .time-cell { color: #9a9da6 !important; font-family: var(--mono); font-size: 11px !important; }
 .points-cell { color: #f1f1f2 !important; font: 600 14px var(--display); }
 .table-message { height: 88px !important; color: #9699a2 !important; text-align: center; font-size: 13px !important; }
-.data-status { min-height: 44px; margin: 0; display: flex; align-items: center; justify-content: flex-end; color: #757984; font-size: 9px; letter-spacing: .5px; }
+.data-status { min-height: 34px; margin: 0; display: flex; align-items: center; justify-content: flex-end; color: #757984; font-size: 9px; letter-spacing: .5px; }
+.data-status[data-state="fresh"] { color: #89bf75; }
+.data-status[data-state="stale"] { color: #d9a64d; }
+.data-status[data-state="error"] { color: #e97872; }
 .footer { min-height: 104px; border-top: 1px solid var(--line); margin-top: 40px; display: flex; align-items: center; gap: 22px; }
 .footer-brand .brand-mark { width: 29px; height: 26px; font-size: 12px; }
 .footer-brand .brand-name { font-size: 11px; }
