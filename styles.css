@@ -1,197 +1,163 @@
-/* Este bloque define las variables de colores personalizados para cada escudería en la propiedad de :root*/
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
 :root {
-    --alfa-romeo-color: #960018;
-    --alpine-f1-color: #0090ff;
-    --aston-martin-color: #006f62;
-    --ferrari-color: #dc0000;
-    --haas-f1-color: #f0d787;
-    --mclaren-color: #ff8700;
-    --mercedes-color: #00d2be;
-    --red-bull-color: #0600ef;
-    --williams-color: #005aff;
-    --alphatauri-color: #469b9b;
+  color-scheme: dark;
+  --background: #101116;
+  --surface: #17191f;
+  --surface-raised: #1d2027;
+  --line: #2a2d35;
+  --muted: #9296a1;
+  --text: #f4f4f2;
+  --accent: #e10600;
+  --mono: 'DM Mono', 'Courier New', monospace;
+  --sans: 'DM Sans', Arial, sans-serif;
+  --display: 'Space Grotesk', Arial, sans-serif;
 }
 
-/* Estilos generales */
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--background); color: var(--text); font-family: var(--sans); -webkit-font-smoothing: antialiased; }
+button, a { font: inherit; }
+a { color: inherit; }
+.page-shell { max-width: 1440px; margin: 0 auto; padding: 0 7.2%; overflow: hidden; }
+.topbar { height: 82px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--line); }
+.brand { display: inline-flex; align-items: center; gap: 11px; text-decoration: none; }
+.brand-mark { display: grid; place-items: center; width: 35px; height: 31px; color: #fff; background: var(--accent); font: 700 15px var(--display); letter-spacing: -1px; transform: skew(-9deg); }
+.brand-name { display: flex; flex-direction: column; font: 700 13px/.95 var(--display); letter-spacing: 1.5px; }
+.brand-name span { color: var(--muted); font: 500 8px/1.5 var(--mono); letter-spacing: 2px; }
+.topbar-right { display: flex; align-items: center; gap: 28px; }
+.season-label, .live-indicator, .eyebrow, .hero-bottom, .section-index, .race-round span, .race-season, .race-date-block span, .race-card-note, .last-race-label, .refresh-button, .results-table th, .data-status, .footer-credit { font-family: var(--mono); font-size: 10px; letter-spacing: 1.4px; }
+.season-label { color: #cacbd0; }
+.live-indicator { color: var(--muted); display: flex; gap: 9px; align-items: center; letter-spacing: 1px; }
+.live-indicator span { width: 7px; height: 7px; border-radius: 50%; background: #89bf75; box-shadow: 0 0 12px #89bf7580; }
+.hero { position: relative; min-height: 480px; display: flex; align-items: center; border-bottom: 1px solid var(--line); }
+.hero-copy { position: relative; z-index: 1; padding: 64px 0 70px; }
+.eyebrow { color: #a6a7af; display: flex; align-items: center; gap: 11px; margin: 0 0 22px; }
+.eyebrow-line { display: inline-block; width: 22px; height: 2px; background: var(--accent); }
+h1, h2, h3, p { margin-top: 0; }
+h1 { margin-bottom: 20px; font: 600 clamp(54px, 7.2vw, 92px)/.96 var(--display); letter-spacing: -6px; }
+h1 span { color: #777b85; }
+.hero-description { max-width: 390px; margin: 0; color: #9b9da6; font-size: 15px; line-height: 1.7; }
+.hero-art { position: absolute; width: 46%; height: 100%; right: -4%; top: 0; color: #e10600; opacity: .78; overflow: hidden; }
+.art-ring { position: absolute; border: 1px solid #ffffff12; border-radius: 50%; }
+.art-ring-one { width: 440px; height: 440px; right: 5%; top: 22px; }
+.art-ring-two { width: 330px; height: 330px; right: 16%; top: 76px; }
+.art-number { position: absolute; right: 16%; top: 13%; font: 700 170px/.9 var(--display); letter-spacing: -18px; color: #ffffff08; }
+.track-line { position: absolute; width: 94%; right: 0; top: 34%; filter: drop-shadow(0 0 16px #e1060050); }
+.art-caption { position: absolute; right: 5%; bottom: 19%; font: 500 11px/1.5 var(--mono); letter-spacing: 2px; text-align: right; color: #aaaab0; }
+.art-vertical { position: absolute; right: 0; top: 27%; writing-mode: vertical-rl; font: 9px var(--mono); letter-spacing: 2px; color: #777b85; }
+.hero-bottom { position: absolute; bottom: 0; left: 0; width: 100%; display: flex; gap: 38px; padding: 17px 0; color: #777b85; font-size: 9px; }
+.scroll-cue { margin-left: auto; }
+.scroll-cue b { color: var(--accent); padding-left: 8px; font-size: 14px; }
+.section-block { padding-top: 67px; }
+.section-heading { display: flex; justify-content: space-between; align-items: end; margin-bottom: 27px; }
+.section-heading .eyebrow { margin-bottom: 12px; }
+h2 { margin-bottom: 0; font: 600 clamp(29px, 4vw, 42px)/1.1 var(--display); letter-spacing: -1.8px; }
+.section-index { color: #6d717b; padding-bottom: 6px; }
+.race-card { border: 1px solid #30333b; background: linear-gradient(115deg, #1a1c23, #14161b); position: relative; }
+.race-card::before { content: ''; width: 3px; position: absolute; inset: 0 auto 0 0; background: var(--accent); }
+.race-card-main { min-height: 178px; padding: 28px 34px; display: grid; grid-template-columns: 82px 1fr auto; align-items: center; gap: 25px; }
+.race-round { font: 600 50px/.85 var(--display); letter-spacing: -3px; color: #f1f1f2; }
+.race-round span { display: block; margin-top: 10px; color: #777b85; font-size: 9px; letter-spacing: 1.6px; }
+.race-season { margin-bottom: 10px; color: #8b8e98; font-size: 9px; }
+.race-identity h3 { margin: 0 0 6px; font: 600 clamp(21px, 3vw, 29px)/1.15 var(--display); letter-spacing: -.6px; }
+.race-location { margin: 0; color: #999ca5; font-size: 13px; }
+.race-date-block { min-width: 150px; border-left: 1px solid var(--line); padding: 10px 0 10px 27px; display: flex; flex-direction: column; gap: 8px; }
+.race-date-block span { color: #858994; font-size: 9px; }
+.race-date-block strong { font: 600 18px var(--display); text-transform: capitalize; }
+.race-date-block small { color: #858994; font: 10px var(--mono); letter-spacing: .4px; }
+.race-card-footer { min-height: 46px; padding: 0 34px; border-top: 1px solid #2a2d35; display: flex; align-items: center; gap: 10px; color: #9699a2; font-size: 11px; }
+.track-icon { color: var(--accent); font-size: 16px; }
+.race-card-note { margin-left: auto; color: #777b85; font-size: 9px; }
+.loading-dots { color: var(--accent); letter-spacing: 3px; animation: pulse 1s infinite alternate; }
+@keyframes pulse { to { opacity: .3; } }
+.results-section { padding-top: 82px; }
+.results-heading { margin-bottom: 18px; }
+.results-controls { display: flex; align-items: center; gap: 21px; padding-bottom: 4px; }
+.last-race-label { color: #8b8e98; font-size: 9px; }
+.refresh-button { display: flex; align-items: center; gap: 8px; border: 1px solid #393c45; color: #d5d6d9; padding: 9px 12px; background: transparent; cursor: pointer; font-size: 9px; transition: border-color .2s, color .2s; }
+.refresh-button:hover { border-color: #858994; color: #fff; }
+.refresh-button:disabled { opacity: .55; cursor: wait; }
+.refresh-button > span { display: inline-block; color: var(--accent); font: 18px/10px var(--sans); }
+.is-loading > span { animation: rotate .8s linear infinite; }
+@keyframes rotate { to { transform: rotate(360deg); } }
+.last-race-summary { min-height: 42px; display: flex; align-items: center; gap: 12px; border-top: 1px solid var(--line); color: #d4d5d8; font: 500 12px var(--display); }
+.summary-divider { color: var(--accent); }
+#last-race-detail { color: #818590; font: 10px var(--mono); }
+.table-wrap { overflow-x: auto; border: 1px solid #2b2e36; border-bottom: 0; }
+.results-table { width: 100%; min-width: 690px; border-collapse: collapse; text-align: left; }
+.results-table th { height: 43px; padding: 0 17px; background: #1b1d24; color: #858994; font-size: 9px; font-weight: 400; }
+.results-table td { height: 55px; padding: 8px 17px; border-top: 1px solid #292c34; color: #c4c6cb; font-size: 12px; }
+.results-table tbody tr { transition: background .15s; }
+.results-table tbody tr:hover { background: #191b21; }
+.results-table tbody tr:hover td { background: transparent; }
+.results-table .position-cell { width: 72px; color: #f1f1f2; font: 600 17px var(--display); }
+.results-table tbody tr:first-child .position-cell { color: #e5be63; }
+.driver-cell { display: flex; align-items: center; gap: 13px; min-width: 210px; }
+.driver-code { color: #8a8e98; font: 10px var(--mono); }
+.driver-name { color: #eeeff1; font: 600 13px var(--display); }
+.team-cell { font-weight: 600; }
+.team-alpine, .team-alpine-f1-team { color: #46a5fa !important; }
+.team-aston-martin { color: #42b39b !important; }
+.team-ferrari { color: #ff4545 !important; }
+.team-haas, .team-haas-f1-team { color: #e5e7e9 !important; }
+.team-mclaren { color: #ff994d !important; }
+.team-mercedes { color: #62d8d2 !important; }
+.team-rb, .team-racing-bulls, .team-rb-f1-team { color: #8d9ddd !important; }
+.team-red-bull, .team-red-bull-racing { color: #8195ff !important; }
+.team-williams { color: #63a2ff !important; }
+.team-kick-sauber, .team-audi { color: #8abf75 !important; }
+.team-cadillac, .team-cadillac-f1-team { color: #c4c4ca !important; }
+.time-cell { color: #9a9da6 !important; font-family: var(--mono); font-size: 11px !important; }
+.points-cell { color: #f1f1f2 !important; font: 600 14px var(--display); }
+.table-message { height: 88px !important; color: #9699a2 !important; text-align: center; font-size: 13px !important; }
+.data-status { min-height: 44px; margin: 0; display: flex; align-items: center; justify-content: flex-end; color: #757984; font-size: 9px; letter-spacing: .5px; }
+.footer { min-height: 104px; border-top: 1px solid var(--line); margin-top: 40px; display: flex; align-items: center; gap: 22px; }
+.footer-brand .brand-mark { width: 29px; height: 26px; font-size: 12px; }
+.footer-brand .brand-name { font-size: 11px; }
+.footer > p { margin: 0; color: #7f828d; font-size: 11px; }
+.footer-credit { margin-left: auto !important; color: #7f828d; font-size: 9px; letter-spacing: .4px; }
+.footer-credit a { color: #b7bac1; text-decoration-color: #5d6069; text-underline-offset: 3px; }
 
-body {
-    background: linear-gradient(to bottom, #f5f5f5, #fafafa);
+@media (max-width: 760px) {
+  .page-shell { padding: 0 5%; }
+  .topbar { height: 68px; }
+  .topbar-right { gap: 14px; }
+  .season-label { display: none; }
+  .live-indicator { font-size: 8px; }
+  .hero { min-height: 440px; }
+  .hero-copy { padding: 53px 0 70px; }
+  h1 { font-size: clamp(58px, 11vw, 82px); letter-spacing: -4px; }
+  .hero-description { max-width: 280px; font-size: 13px; }
+  .hero-art { width: 75%; right: -19%; opacity: .44; }
+  .art-number { font-size: 125px; }
+  .hero-bottom { gap: 18px; font-size: 8px; }
+  .hero-bottom > span:nth-child(2) { display: none; }
+  .section-block { padding-top: 51px; }
+  .section-heading { align-items: end; }
+  .race-card-main { grid-template-columns: 54px 1fr; gap: 18px; padding: 24px 21px; }
+  .race-round { font-size: 40px; }
+  .race-date-block { grid-column: 2; border-left: 0; border-top: 1px solid var(--line); padding: 14px 0 0; margin-top: 1px; min-width: 0; gap: 5px; }
+  .race-date-block strong { font-size: 16px; }
+  .race-card-footer { padding: 0 21px; }
+  .results-section { padding-top: 65px; }
+  .results-heading { align-items: start; gap: 12px; flex-direction: column; }
+  .results-controls { width: 100%; justify-content: space-between; }
+  .last-race-summary { flex-wrap: wrap; align-content: center; padding: 9px 0; gap: 7px; }
+  .footer { flex-wrap: wrap; padding: 22px 0; gap: 12px 18px; }
+  .footer > p { font-size: 10px; }
+  .footer-credit { width: 100%; margin-left: 0 !important; }
 }
 
-.container {
-    text-align: center;
+@media (max-width: 420px) {
+  .page-shell { padding: 0 18px; }
+  .live-indicator { letter-spacing: .4px; }
+  .hero-bottom { letter-spacing: .7px; }
+  .scroll-cue { font-size: 7px; }
+  .section-index { font-size: 8px; }
+  .race-card-note { font-size: 8px; }
 }
 
-.header {
-    text-align: center;
-    margin-bottom: 20px;
-    font-family: Arial, sans-serif;
-}
-
-h1 {
-    font-size: 3rem;
-    margin-bottom: 10px;
-    font-family: "Times New Roman", Times, serif;
-}
-
-h2 {
-    font-size: 2.5rem;
-    margin-bottom: 10px;
-}
-
-/* Tabla de resultados */
-
-.table {
-    border-collapse: collapse;
-    margin: 0 auto 20px auto;
-    max-width: 1000px;
-    width: 100%;
-    font-family: Arial, sans-serif;
-    font-size: 1.2rem;
-    color: #555;
-}
-
-.table td,
-.table th {
-    padding: 10px;
-    border: 1px solid #ccc;
-    text-align: center;
-}
-
-.table th {
-    background-color: #eee;
-    font-weight: bold;
-    color: s#555;
-}
-
-#race-results {
-    background-color: #fff;
-}
-
-#race-results th {
-    position: sticky;
-    top: 0;
-    z-index: 1;
-    background-color: #eee;
-}
-
-#race-results td {
-    background-color: #f9f9f9;
-}
-
-#race-results td:nth-child(1) {
-    font-weight: bold;
-}
-
-#race-results td:nth-child(2) {
-    font-weight: bold;
-    /*color: #004080;*/
-}
-
-#race-results td:nth-child(3) {
-    /*color: #333333;*/
-    font-weight: bold;
-}
-
-#race-results td:nth-child(4) {
-    font-weight: bold;
-}
-
-#race-results tr:nth-child(3) {
-    color: goldenrod;
-}
-
-#race-results tr:nth-child(n+4):nth-child(-n+7) {
-    color: rgb(122, 122, 122);
-}
-
-#race-results tr:nth-child(n+8):nth-child(-n+12) {
-    color: #9e6c39;
-}
-
-#race-results tr:nth-child(n+13):nth-child(-n+22) {
-    color: rgb(172, 172, 172);
-}
-
-/* Tabla de datos */
-
-#race-data {
-    margin-top: 30px;
-    border-collapse: collapse;
-}
-
-#race-data td {
-    padding: 5px 20px;
-    border: 1px solid #ccc;
-}
-
-
-/* Elementos específicos */
-
-#race-status {
-    font-size: 1.2rem;
-    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
-}
-
-.constructor-name-alfa-romeo {
-    color: var(--alfa-romeo-color);
-}
-
-.constructor-name-alpine-f1 {
-    color: var(--alpine-f1-color);
-}
-
-.constructor-name-aston-martin {
-    color: var(--aston-martin-color);
-}
-
-.constructor-name-ferrari {
-    color: var(--ferrari-color);
-}
-
-.constructor-name-haas-f1 {
-    color: var(--haas-f1-color);
-}
-
-.constructor-name-mclaren {
-    color: var(--mclaren-color);
-}
-
-.constructor-name-mercedes {
-    color: var(--mercedes-color);
-}
-
-.constructor-name-red-bull {
-    color: var(--red-bull-color);
-}
-
-.constructor-name-williams {
-    color: var(--williams-color);
-}
-
-.constructor-name-alphatauri {
-    color: var(--alphatauri-color);
-}
-
-@media (max-width: 768px) {
-
-    /* Este bloque define las propiedades de estilo para los encabezados H1 */
-    h1 {
-        font-size: 2.5rem;
-    }
-
-    /* Este bloque define las propiedades de estilo para los encabezados H2 */
-    h2 {
-        font-size: 1.8rem;
-    }
-
-    /* Este bloque define las propiedades de estilo para el elemento con ID race-status */
-    #race-status {
-        font-size: 1rem;
-    }
-
-    /* Este bloque define las propiedades de estilo para la tabla con clase .table */
-    .table {
-        font-size: 1rem;
-    }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
 }

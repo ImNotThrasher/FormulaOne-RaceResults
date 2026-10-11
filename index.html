@@ -1,60 +1,86 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-    <title>Resultados en tiempo real de Fórmula 1</title>
+<!doctype html>
+<html lang="es">
+  <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#101116" />
+    <meta name="description" content="Calendario de la próxima carrera y últimos resultados de Fórmula 1." />
+    <title>F1 Race Results | Fórmula 1</title>
+    <link rel="preconnect" href="https://api.jolpi.ca" />
     <link rel="stylesheet" href="styles.css" />
-</head>
-
-<body>
-    <div class="container">
-        <div class="header">
-            <h1>Fórmula 1</h1>
-            <p id="race-status">Cargando resultados...</p>
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <main class="page-shell">
+      <header class="topbar">
+        <a class="brand" href="#top" aria-label="F1 Race Results, inicio">
+          <span class="brand-mark" aria-hidden="true">F1</span>
+          <span class="brand-name">RACE<span>RESULTS</span></span>
+        </a>
+        <div class="topbar-right">
+          <span class="season-label" id="season-label">TEMPORADA</span>
+          <span class="live-indicator"><span></span> DATOS ACTUALIZADOS</span>
         </div>
-        <div class="table-container">
-            <h2>Resultados de la última carrera</h2>
-            <table id="race-data" class="table">
-                <tbody>
-                    <tr>
-                        <td>Carrera:</td>
-                        <td id="race-name"></td>
-                    </tr>
-                    <tr>
-                        <td>Circuito:</td>
-                        <td id="circuit-name"></td>
-                    </tr>
-                    <tr>
-                        <td>Localidad:</td>
-                        <td id="circuit-location"></td>
-                    </tr>
-                    <tr>
-                        <td>Fecha:</td>
-                        <td id="race-date"></td>
-                    </tr>
-                </tbody>
+      </header>
 
-            </table>
+      <section class="hero" id="top" aria-labelledby="page-title">
+        <div class="hero-copy">
+          <p class="eyebrow"><span class="eyebrow-line"></span> EL CAMPEONATO, DE UN VISTAZO</p>
+          <h1 id="page-title">La pasión<br /><span>sigue en carrera.</span></h1>
+          <p class="hero-description">Seguí el calendario y los resultados más recientes de la Fórmula 1.</p>
         </div>
-    </div>
-    <table id="race-results" class="table">
-        <tbody>
-            <thead>
-                <th>Posición</th>
-                <th>Código</th>
-                <th>Piloto</th>
-                <th>Equipo</th>
-                <th>Vueltas</th>
-                <th>Tiempo</th>
-                <th>Puntos</th>
-            </thead>
-            <!-- filas de resultados, se agregarán con JavaScript -->
-        </tbody>
-    </table>
+        <div class="hero-art" aria-hidden="true">
+          <div class="art-ring art-ring-one"></div>
+          <div class="art-ring art-ring-two"></div>
+          <div class="art-number">01</div>
+          <div class="art-caption">RACE<br />WEEKEND</div>
+          <svg class="track-line" viewBox="0 0 440 240" fill="none">
+            <path d="M35 170C57 145 77 156 89 132L112 86C123 64 144 67 153 91L165 124C171 140 187 146 200 136L231 112C245 101 260 104 269 120L290 158C300 175 317 178 330 162L359 126C375 106 400 117 395 139L390 159C386 177 402 189 419 178" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M35 170C57 145 77 156 89 132L112 86C123 64 144 67 153 91L165 124C171 140 187 146 200 136L231 112C245 101 260 104 269 120L290 158C300 175 317 178 330 162L359 126C375 106 400 117 395 139L390 159C386 177 402 189 419 178" stroke="currentColor" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" opacity=".12" />
+            <circle cx="35" cy="170" r="7" fill="currentColor" />
+          </svg>
+          <span class="art-vertical">FORMULA 1 · 2026</span>
+        </div>
+        <div class="hero-bottom"><span>01 / CALENDARIO</span><span>02 / RESULTADOS</span><span class="scroll-cue">DESLIZÁ PARA EXPLORAR <b>↓</b></span></div>
+      </section>
 
+      <section class="next-race section-block" aria-labelledby="next-race-heading">
+        <div class="section-heading">
+          <div><p class="eyebrow"><span class="eyebrow-line"></span> LO QUE VIENE</p><h2 id="next-race-heading">Próxima carrera</h2></div>
+          <span class="section-index">01 — 02</span>
+        </div>
+        <article class="race-card" id="next-race-card" aria-live="polite">
+          <div class="race-card-main">
+            <div class="race-round" id="next-race-round">—<span>RONDA</span></div>
+            <div class="race-identity">
+              <p class="race-season" id="next-race-season">CAMPEONATO MUNDIAL DE FÓRMULA 1</p>
+              <h3 id="next-race-name">Buscando próxima carrera<span class="loading-dots" aria-hidden="true">...</span></h3>
+              <p class="race-location" id="next-race-location">Consultando calendario</p>
+            </div>
+            <div class="race-date-block"><span>FECHA DE CARRERA</span><strong id="next-race-date">—</strong><small id="next-race-time"></small></div>
+          </div>
+          <div class="race-card-footer"><span class="track-icon" aria-hidden="true">↗</span><span id="next-race-circuit">Calendario oficial de carreras</span><span class="race-card-note" id="next-race-countdown">TEMPORADA F1</span></div>
+        </article>
+      </section>
 
-    <script src="script.js"></script>
-</body>
+      <section class="results-section section-block" aria-labelledby="results-heading">
+        <div class="section-heading results-heading">
+          <div><p class="eyebrow"><span class="eyebrow-line"></span> BANDERA A CUADROS</p><h2 id="results-heading">Últimos resultados</h2></div>
+          <div class="results-controls"><span class="last-race-label" id="last-race-label">ÚLTIMA CARRERA</span><button class="refresh-button" id="refresh-button" type="button"><span aria-hidden="true">↻</span> ACTUALIZAR</button></div>
+        </div>
+        <div class="last-race-summary" id="last-race-summary" aria-live="polite">
+          <span id="last-race-name">Cargando resultados...</span><span class="summary-divider">/</span><span id="last-race-detail">Consultando datos</span>
+        </div>
+        <div class="table-wrap">
+          <table class="results-table" id="race-results">
+            <thead><tr><th scope="col">POS.</th><th scope="col">PILOTO</th><th scope="col">EQUIPO</th><th scope="col">VUELTAS</th><th scope="col">TIEMPO / ESTADO</th><th scope="col">PTS.</th></tr></thead>
+            <tbody id="results-body"><tr><td colspan="6" class="table-message">Cargando los últimos resultados...</td></tr></tbody>
+          </table>
+        </div>
+        <p class="data-status" id="data-status" role="status">Conectando con la fuente de datos...</p>
+      </section>
 
+      <footer class="footer"><a class="brand footer-brand" href="#top"><span class="brand-mark" aria-hidden="true">F1</span><span class="brand-name">RACE<span>RESULTS</span></span></a><p>Hecho por inhumanos para humanos.</p><p class="footer-credit">Datos de <a href="https://github.com/jolpica/jolpica-f1" target="_blank" rel="noreferrer">Jolpica F1</a></p></footer>
+    </main>
+  </body>
 </html>
