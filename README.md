@@ -6,6 +6,12 @@ Este proyecto está licenciado bajo la [GNU General Public License v3.0](LICENSE
 
 Sitio estático para consultar la próxima carrera y los resultados de la última fecha del Campeonato Mundial de Fórmula 1.
 
+## Índice
+
+- [Uso](#uso)
+- [Datos](#datos)
+- [Tecnologías](#tecnologías)
+
 ## Uso
 
 Abrí `index.html` en un navegador moderno o visitá el sitio publicado en [GitHub Pages](https://imnotthrasher.github.io/FormulaOne-RaceResults/).
