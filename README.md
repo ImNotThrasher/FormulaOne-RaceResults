@@ -4,7 +4,7 @@ Sitio estático para consultar la próxima carrera y los resultados de la últim
 
 ## Uso
 
-Abrí `index.html` en un navegador moderno o visitá el sitio publicado en [GitHub Pages](https://imnotthrasher.github.io/FormulaOne-RaceResults/). No requiere instalar dependencias ni compilar.
+Abrí `index.html` en un navegador moderno o visitá el sitio publicado en [GitHub Pages](https://imnotthrasher.github.io/FormulaOne-RaceResults/).
 
 La página carga los datos al abrirse, permite actualizarlos manualmente y vuelve a consultarlos cada cinco minutos. Necesita conexión a internet para obtener información de la API.
 
