@@ -4,9 +4,11 @@ Sitio estático para consultar la próxima carrera y los resultados de la últim
 
 ## Uso
 
-Abrí `index.html` en un navegador moderno o publicá el repositorio en un servicio de hosting estático, como Netlify. No requiere instalar dependencias ni compilar.
+Abrí `index.html` en un navegador moderno o visitá el sitio publicado en [GitHub Pages](https://imnotthrasher.github.io/FormulaOne-RaceResults/).
 
-La página carga los datos al abrirse, permite actualizarlos manualmente y vuelve a consultarlos cada cinco minutos. Necesita conexión a internet para obtener información de la API.
+La página carga los datos al abrirse, permite actualizarlos manualmente y vuelve a consultarlos cada cinco minutos. Necesita conexión a internet para actualizarse; si la API no está disponible, muestra la última información guardada en ese navegador. Los horarios se presentan en la zona horaria local del visitante.
+
+Los nombres de las escuderías se muestran con colores distintivos y legibles sobre el tema oscuro.
 
 ## Datos
 
